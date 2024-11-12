@@ -17,7 +17,7 @@ This project is a to-do list application with a separate **frontend** and **back
 #### **Clone the repository**
 
     git clone <URL_of_the_repo>
-	cd BASFTEHCNICAL
+	cd BASF_FS_TECHINT
 
 ### **Backend: FastAPI and PostgreSQL**
 
