@@ -1,3 +1,3 @@
 # src/constants/app_constants.py
-user = "postgres" 
-pwd = "invictor1076_Raven"  
+user = "<your_postgres_username>" 
+pwd = "<your_postgres_password>"  

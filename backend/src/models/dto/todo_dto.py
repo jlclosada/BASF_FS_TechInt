@@ -4,6 +4,7 @@ class TodoItemBase(BaseModel):
     title: str
     description: str
     completed: bool = False
+    favorite: bool = False
 
 class ToDoItemCreate(TodoItemBase):
     pass

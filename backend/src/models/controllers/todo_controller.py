@@ -1,5 +1,5 @@
 from sqlalchemy.orm import Session
-from src.models.dto.todo_dto import ToDoItemCreate
+from src.models.dto.todo_dto import ToDoItemCreate, ToDoItemUpdate
 from src.models import models
 
 # get all ToDo items
@@ -41,19 +41,21 @@ def remove_item(db: Session, item_id: int):
     return item
 
 
-def edit_item(db: Session, item_id: int, title: str, description: str):
+def edit_item(db: Session, item_id: int, item_update: ToDoItemUpdate):
     item = db.query(models.TodoItem).filter(models.TodoItem.id == item_id).first()
     if item:
-        item.title = title
-        item.description = description
+        item.title = item_update.title
+        item.description = item_update.description
+        item.completed = item_update.completed
         db.commit()
+        db.refresh(item)
     return item
 
 # search function
 def search_items(db: Session, search_term: str, skip: int = 0, limit: int = 10):
     return db.query(models.TodoItem).filter(
         or_(
-            models.TodoItem.title.ilike(f"%{search_term}%"),  # Busca por título
-            models.TodoItem.description.ilike(f"%{search_term}%")  # Busca por descripción
+            models.TodoItem.title.ilike(f"%{search_term}%"),  
+            models.TodoItem.description.ilike(f"%{search_term}%") 
         )
     ).offset(skip).limit(limit).all()

@@ -14,7 +14,7 @@ def remove_todo_item(db: Session, item_id: int):
     return remove_item(db, item_id)
 
 def edit_todo_item(db: Session, item_id: int, item: ToDoItemUpdate):
-    return update_item(db, item_id, item.completed)  
+    return edit_item(db, item_id, item)
 
 def search_todo_items(db: Session, search_term: str):
     return search_items(db, search_term)
