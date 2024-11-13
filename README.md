@@ -1,6 +1,17 @@
 # **BASF Technical - ToDo App**
 ### **Project Description**
 This project is a to-do list application with a separate **frontend** and **backend architecture**.
+
+The user must launch the backend and frontend separately in their local environment, both will connect once they are running.
+Once the project is launched, the web application will be running on a local server **"localhost:3000"**.
+
+The section where the proposed exercise is located is easy to understand. It is a page that loads a VUE component in charge of calling all the **CRUD processes** of the backend and displaying them in a list in a reactive way. In the component we can find the following functionality:
+- **Create new task**: Allows the user to create new tasks from a name and description.
+- **Delete task**: Allows the user to completely delete a task individually using a delete button found in the actions column.
+- **Edit task**: The user can edit the task in two ways: marking it as a favorite and/or marking it as completed. All you have to do is check the boxes created for this purpose within each task.
+- **Search tasks**: The user can dynamically and reactively search for the task based on its name by entering text in the Search input.
+- **Filter favorite tasks**: The user will be able to filter the tasks to find the tasks that they have previously marked as favorites.
+
 ### **Structure**
 **Backend**: API built with **Python** and **FastAPI** to handle task list CRUD operations.
 
@@ -10,14 +21,15 @@ This project is a to-do list application with a separate **frontend** and **back
 
  1. **Python 3.9** or higher (for the backend)
  2. **Node.js** and **npm** (for the frontend in Vue)
- 3. **PostgreSQL** configured and running
+ 3. **PostgreSQL** configured and running (It is necessary to have PostgreSQL installed for this project and change the constants)
 
 ## **Configuration and execution**
 
 #### **Clone the repository**
-
-    git clone <URL_of_the_repo>
+  ```bash
+  git clone <URL_of_the_repo>
 	cd BASF_FS_TECHINT
+  ```
 
 ### **Backend: FastAPI and PostgreSQL**
 
@@ -31,12 +43,17 @@ cd backend
 
 ```bash
 python -m venv venv
-source venv/bin/activate  # en Windows usa 'venv\Scripts\activate'
+
+venv\Scripts\activate # in Windows
+
+source venv/bin/activate # in UNIX/Linux
+
 pip install -r requirements.txt
 ```
-- Configure the **PostgreSQL** database:
-1. Create a database called **todoapp**.
-1. In the file **src/constants/app_constants.py**, update the connection data in user and pwd:
+#### Configure the **PostgreSQL** database:
+You will need to have PostgreSQL installed on your computer
+1. Create a database called **"todoapp"**.
+2. In the file **src/constants/app_constants.py**, update the connection data in user and pwd:
 
 ```python
 user = "<your_user>"
@@ -90,10 +107,10 @@ This project is the user interface of the BASF ToDo App, developed with **Nuxt.j
 #### **Facility**
 1. **Clone the repository** and navigate to the **frontend** folder:
 ```bash
-git clone [URL del repositorio]
+git clone [<URL_of_the_repo>]
 cd frontend
 ```
-2. Install the necessary **dependencies**:
+2. Install the necessary **dependencies**: (Use the command depending on the package manager your computer uses.)
 ```bash
 # npm
 npm install
@@ -185,4 +202,4 @@ This file manages the project's dependencies and scripts. Key dependencies inclu
 ##### **tsconfig.json**
 Extends Nuxt's TypeScript configuration, providing support for TypeScript in the application.
 
-
+###End
