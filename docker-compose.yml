@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  # Service for PostgreSQL database
+  db:
+    image: postgres:13
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+      POSTGRES_DB: todoapp
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5434:5432"
+
+  # backend service (FastAPI)
+  backend:
+    build:
+      context: ./backend  # Path to the backend Dockerfile
+    container_name: backend
+    environment:
+      DB_HOST: db
+      DB_PORT: 5434
+      DB_NAME: todoapp
+      DB_USER: myuser
+      DB_PASSWORD: mypassword
+    ports:
+      - "8000:8000" 
+    depends_on:
+      - db  # The backend depends on the database being ready
+
+  # frontend service (Vue.js)
+  frontend:
+    build:
+      context: ./frontend  # Path to the frontend Dockerfile
+    container_name: frontend
+    ports:
+      - "3000:3000" 
+    depends_on:
+      - backend
+
+# Volumes for persisting PostgreSQL data
+volumes:
+  postgres_data:

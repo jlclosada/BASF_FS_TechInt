@@ -22,6 +22,7 @@ The section where the proposed exercise is located is easy to understand. It is 
  1. **Python 3.9** or higher (for the backend)
  2. **Node.js** and **npm** (for the frontend in Vue)
  3. **PostgreSQL** configured and running (It is necessary to have PostgreSQL installed for this project and change the constants)
+ 4. **Docker**
 
 ## **Configuration and execution**
 
@@ -30,8 +31,52 @@ The section where the proposed exercise is located is easy to understand. It is 
   git clone <URL_of_the_repo>
 	cd BASF_FS_TECHINT
   ```
+ ## Deploy with Docker
+ It does not work in an optimal way
+ ####**1. Review Docker Configuration Files**
+ Inside the project directory, make sure you have the following files:
 
-### **Backend: FastAPI and PostgreSQL**
+- **docker-compose.yml**: File that defines all Docker services (database, backend, and frontend).
+- **Dockerfile** (in the backend and frontend directory): Files to build the backend and frontend service images.
+**wait-for-it.sh**: Script to make sure the database container is ready before starting the backend.
+
+#### **2. Build and Start Containers**
+In the project directory, run the following command to build and start containers using Docker Compose:
+```bash
+docker-compose up --build
+```
+This command will download the necessary images (if not available locally), build the custom images for the backend and frontend, and start the database, backend, and frontend containers.
+
+#### **3. Accessing the Application**
+Once the containers are up and running, you will be able to access the application in your browser.
+
+- **Frontend (Vue.js)**: Go to http://localhost:3000 to see the user interface.
+- **Backend (FastAPI)**: If you need to access the backend API directly, go to http://localhost:8000.
+- **Database (PostgreSQL)**: The PostgreSQL database is accessible on port 5434. You can use tools like pgAdmin or any PostgreSQL client to connect with the following configuration:
+- **Host**: localhost
+- **Port**: 5434
+- **User**: myuser
+- **Password**: mypassword
+- **Database**: todoapp
+
+#### **4. View Container Logs**
+If you need to view container logs for debugging or monitoring, you can run:
+```bash
+docker-compose logs
+```
+To view the logs for a specific service (for example, the frontend), you can use:
+```bash
+docker-compose logs-frontend
+```
+
+#### **5. Stopping Containers**
+If you want to stop all containers, simply run the following command:
+```bash
+docker-compose down
+
+```
+
+## **Backend: FastAPI and PostgreSQL**
 
 **Installation and Configuration**
 
@@ -64,7 +109,6 @@ pwd = "<your_password>"
 python db_test.py
 ```
 - Start the **FastAPI** server:
-
 ```bash
 uvicorn main:app --reload
 ```
@@ -100,7 +144,7 @@ BASFTECHNICAL/
 │   ├── config.py                 # Connection settings
 │   └── requirements.txt          # Python dependencies
 ```
-### **Frontend: VUE3 and NUXT**
+## **Frontend: VUE3 and NUXT**
 
 This project is the user interface of the BASF ToDo App, developed with **Nuxt.js 3** and **Vue.js**. It uses **Bootstrap** for visual design and **Axios** for communication with the backend.
 
