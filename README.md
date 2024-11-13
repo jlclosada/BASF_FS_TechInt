@@ -32,10 +32,8 @@ The section where the proposed exercise is located is easy to understand. It is 
 	cd BASF_FS_TECHINT
   ```
  ## Deploy with Docker
- 
  It does not work in an optimal way
- 
- ####**1. Review Docker Configuration Files**
+ #### **1. Review Docker Configuration Files**
  Inside the project directory, make sure you have the following files:
 
 - **docker-compose.yml**: File that defines all Docker services (database, backend, and frontend).
